@@ -4,6 +4,7 @@ package lk.ijse.gdse.aad68.NoteCollectorV2.service;
 
 import lk.ijse.gdse.aad68.NoteCollectorV2.cutomObj.UserResponse;
 import lk.ijse.gdse.aad68.NoteCollectorV2.dto.impl.UserDTO;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
@@ -13,4 +14,7 @@ public interface UserService {
     void deleteUser(String userId);
     UserResponse getSelectedUser(String userId);
     List<UserDTO> getAllUsers();
+    UserDetailsService userDetailsService();
+
+
 }

@@ -5,8 +5,11 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -14,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-public class UserEntity implements SuperEntity {
+public class UserEntity implements UserDetails ,SuperEntity{
     @Id
     private String userId;
     private String firstName;
@@ -27,4 +30,14 @@ public class UserEntity implements SuperEntity {
     @OneToMany(mappedBy = "user")
     private List<NoteEntity> notes = new ArrayList<>();
 
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getUsername() {
+        return "";
+    }
 }

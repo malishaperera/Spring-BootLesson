@@ -13,6 +13,7 @@ import lk.ijse.gdse.aad68.NoteCollectorV2.util.AppUtil;
 import lk.ijse.gdse.aad68.NoteCollectorV2.util.Mapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -79,5 +80,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> getAllUsers() {
         return mapping.convertUserToDTOList(userDao.findAll());
+    }
+
+    @Override
+    public UserDetailsService userDetailsService() {
+        return email ->
+                userDao.findByEmail(email)
+                        .orElseThrow(()-> new UserNotFoundException("User Not Found"));
     }
 }
