@@ -11,8 +11,5 @@ import java.util.Optional;
 @Repository
 public interface UserDao extends JpaRepository<UserEntity, String> {
 //    @Query()
-    UserEntity getUserEntitiesByUserId(String userId);
-
-
     Optional<UserEntity> findByEmail(String email);
 }

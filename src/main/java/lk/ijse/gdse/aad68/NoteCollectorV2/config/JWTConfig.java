@@ -55,8 +55,7 @@ public class JWTConfig extends OncePerRequestFilter {
                 emptyContext.setAuthentication(authToken);
                 SecurityContextHolder.setContext(emptyContext);
             }
-
         }
-
+        filterChain.doFilter(request,response);
     }
 }

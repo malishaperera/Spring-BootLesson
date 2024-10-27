@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,5 +23,6 @@ public class UserDTO implements SuperDTO, UserResponse {
     private String password;
 
     private String profilePicture;
-    private List<NoteEntity> notes;
+    private String role;
+    private List<NoteDTO> notes = new ArrayList<>();
 }
