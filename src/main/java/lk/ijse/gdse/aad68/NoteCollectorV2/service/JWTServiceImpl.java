@@ -39,8 +39,8 @@ public class JWTServiceImpl implements JWTService {
     public boolean isTokenValid(String token, UserDetails userDetails) {
         var username = extractUsername(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
-
     }
+
     // actual process
     private <T> T extractClaim(String token, Function<Claims,T> claimResolve) {
         final Claims claims = getAllClaims(token);
@@ -57,8 +57,8 @@ public class JWTServiceImpl implements JWTService {
                 .setIssuedAt(now)
                 .setExpiration(expire)
                 .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
-
     }
+
     private String refreshToken(Map<String,Object> extractClaims,UserDetails userDetails){
         extractClaims.put("role",userDetails.getAuthorities());
         Date now = new Date();
@@ -70,16 +70,20 @@ public class JWTServiceImpl implements JWTService {
                 .setExpiration(refreshExpire)
                 .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
     }
+
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
+
     private Date extractExpiration(String token) {
         return extractClaim(token,Claims::getExpiration);
     }
+
     private Claims getAllClaims(String token) {
         return Jwts.parser().setSigningKey(getSignKey()).build().parseClaimsJws(token)
                 .getBody();
     }
+
     private Key getSignKey(){
         byte[] decode = Decoders.BASE64.decode(jwtKey);
         return Keys.hmacShaKeyFor(decode);

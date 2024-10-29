@@ -2,6 +2,7 @@ package lk.ijse.gdse.aad68.NoteCollectorV2.service;
 
 import lk.ijse.gdse.aad68.NoteCollectorV2.dao.UserDao;
 import lk.ijse.gdse.aad68.NoteCollectorV2.dto.impl.UserDTO;
+import lk.ijse.gdse.aad68.NoteCollectorV2.jwtModels.JwtAuthResponse;
 import lk.ijse.gdse.aad68.NoteCollectorV2.jwtModels.SignIn;
 import lk.ijse.gdse.aad68.NoteCollectorV2.util.Mapping;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,6 @@ public class AuthenticationServiceIMPL implements AuthenticationService {
     //utils
     private final AuthenticationManager authenticationManager;
 
-
     @Override
     public JwtAuthResponse signIn(SignIn signIn) {
         authenticationManager.authenticate(
@@ -29,7 +29,6 @@ public class AuthenticationServiceIMPL implements AuthenticationService {
         var generatedToken = jwtService.generateToken(userByEmail);
         return JwtAuthResponse.builder().token(generatedToken).build() ;
     }
-
 
     @Override
     public JwtAuthResponse signUp(UserDTO signUpUser) {

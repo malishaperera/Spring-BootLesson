@@ -31,14 +31,17 @@ public class AuthController {
             @RequestPart ("profilePic") MultipartFile profilePic,
             @RequestPart ("Role") String role) {
         try {
+            // Handle profile picture
             String base64ProfilePic = AppUtil.toBase64ProfilePic(profilePic);
+
+            // build the user
             UserDTO buildUserDTO = new UserDTO();
             buildUserDTO.setUserId(AppUtil.createUserId());
             buildUserDTO.setFirstName(firstName);
             buildUserDTO.setLastName(lastName);
             buildUserDTO.setEmail(email);
             buildUserDTO.setPassword(passwordEncoder.encode(password));
-            buildUserDTO.setProfilePic(base64ProfilePic);
+            buildUserDTO.setProfilePicture(base64ProfilePic);
             buildUserDTO.setRole(role);
             //send to the service layer
             return ResponseEntity.ok(authenticationService.signUp(buildUserDTO));
@@ -48,10 +51,12 @@ public class AuthController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @PostMapping(value = "signin")
     public ResponseEntity<JwtAuthResponse> signIn(@RequestBody SignIn signIn) {
         return ResponseEntity.ok(authenticationService.signIn(signIn));
     }
+
     @PostMapping("refresh")
     public ResponseEntity<JwtAuthResponse> refreshToken (@RequestParam ("refreshToken") String refreshToken) {
         return ResponseEntity.ok(authenticationService.refreshToken(refreshToken));

@@ -35,7 +35,6 @@ public class JWTConfig extends OncePerRequestFilter {
         if(StringUtils.isEmpty(initToken) || !initToken.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
-
        }
         //Token received
         jwToken = initToken.substring(7);

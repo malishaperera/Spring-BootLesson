@@ -15,6 +15,4 @@ public interface UserService {
     UserResponse getSelectedUser(String userId);
     List<UserDTO> getAllUsers();
     UserDetailsService userDetailsService();
-
-
 }

@@ -41,7 +41,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-
     @Override
     public void updateUser(UserDTO userDTO) {
         Optional<UserEntity> tmpUser = userDao.findById(userDTO.getUserId());
@@ -55,7 +54,6 @@ public class UserServiceImpl implements UserService {
             tmpUser.get().setProfilePicture(userDTO.getProfilePicture());
         }
     }
-
 
     @Override
     public void deleteUser(String userId) {

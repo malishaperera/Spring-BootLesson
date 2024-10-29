@@ -27,10 +27,6 @@ public  class NoteServiceIMPL implements NoteService {
     @Autowired
     private Mapping mapping;
 
-
-
-
-
     @Override
     public void saveNote(NoteDTO noteDTO) {
         noteDTO.setNoteId(AppUtil.createNoteID());
@@ -39,13 +35,7 @@ public  class NoteServiceIMPL implements NoteService {
         if (saveNoted == null) {
             throw new DataPersistFailedException("Can't save note");
         }
-
-//        return "Saved successfully in Service layer";
     }
-
-
-
-
 
     @Override
     public void updateNote(String noteId, NoteDTO incomeNoteDTO) {
@@ -60,7 +50,6 @@ public  class NoteServiceIMPL implements NoteService {
         }
     }
 
-
     @Override
     public void deleteNote(String noteId) {
 //       return noteDao.deleteById(noteId);
@@ -71,7 +60,6 @@ public  class NoteServiceIMPL implements NoteService {
             noteDao.deleteById(noteId);
         }
     }
-
 
     @Override
     public NoteResponse getSelectedNote(String noteId) {

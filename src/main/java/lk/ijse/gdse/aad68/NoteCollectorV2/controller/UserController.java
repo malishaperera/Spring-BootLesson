@@ -23,7 +23,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-
     @Autowired
     private final UserService userService;
 
@@ -38,15 +37,18 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public UserResponse getSelectedUser(@PathVariable ("id") String userId){
         return userService.getSelectedUser(userId);
     }
+
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserDTO> getAllUsers(){
         return userService.getAllUsers();
     }
+
     @PatchMapping(value = "/{id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> updateUser(
             @PathVariable ("id") String id,
@@ -64,7 +66,7 @@ public class UserController {
             updateUser.setLastName(updateLastName);
             updateUser.setPassword(updatePassword);
             updateUser.setEmail(updateEmail);
-            updateUser.setProfilePic(updateBase64ProfilePic);
+            updateUser.setProfilePicture(updateBase64ProfilePic);
             userService.updateUser(updateUser);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (UserNotFoundException e){

@@ -19,7 +19,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("api/v1/notes")
 @RequiredArgsConstructor
@@ -31,7 +30,6 @@ public class NoteController {
     @GetMapping("/health")
     public String healthCheck(){
        return "Note Taker is running";
-
     }
 
     //To Do CRUD Operation
@@ -51,11 +49,13 @@ public class NoteController {
             }
         }
     }
+
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "allnotes", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<NoteDTO> getAllNotes(){
         return noteService.getAllNotes();
     }
+
     @GetMapping(value = "/{noteId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public NoteResponse getSelectedNote(@PathVariable ("noteId") String noteId)  {
         if(noteId.isEmpty() || noteId == null){
@@ -63,6 +63,7 @@ public class NoteController {
         }
         return noteService.getSelectedNote(noteId);
     }
+
     @PatchMapping(value = "/{noteId}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateNote(@PathVariable ("noteId") String noteId, @RequestBody NoteDTO note) {
         try {
@@ -77,6 +78,7 @@ public class NoteController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @DeleteMapping(value ="/{noteId}" )
     public ResponseEntity<Void> deleteNote(@PathVariable ("noteId") String noteId) {
         try {

@@ -19,14 +19,15 @@ public class Mapping {
     @Autowired
     private ModelMapper modelMapper;
 
-
     //matters of NoteEntity and DTO
     public NoteDTO convertToDTO(NoteEntity note) {
         return modelMapper.map(note, NoteDTO.class);
     }
+
     public NoteEntity convertToEntity(NoteDTO dto) {
         return modelMapper.map(dto, NoteEntity.class);
     }
+
     public List<NoteDTO> convertToDTO(List<NoteEntity> notes) {
         return modelMapper.map(notes, List.class);
     }
@@ -39,6 +40,7 @@ public class Mapping {
     public UserDTO convertToUserDTO(UserEntity userEntity) {
         return modelMapper.map(userEntity, UserDTO.class);
     }
+
     public List<UserDTO> convertUserToDTOList(List<UserEntity> userEntities) {
 //        return modelMapper.map(userEntities, List.class);
         return modelMapper.map(userEntities, new TypeToken<List<UserDTO>>() {}.getType());
